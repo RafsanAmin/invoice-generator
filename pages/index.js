@@ -11,6 +11,7 @@ export default function Home() {
       </Head>
 
       <p>On Developement!!</p>
+      <img src="/inv.jpg" alt="dssdd" />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
@@ -11,6 +12,9 @@ export default function Home() {
       </Head>
 
       <p>On Developement!!</p>
+      <button type="button">
+        <Link href="/app">Click here to see the app</Link>
+      </button>
       <img src="/inv.jpg" alt="dssdd" />
     </div>
   );

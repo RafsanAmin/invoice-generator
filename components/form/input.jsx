@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Input({ value, setValue }) {
+function Input({ value, setValue, action }) {
   return (
     <div>
       <input

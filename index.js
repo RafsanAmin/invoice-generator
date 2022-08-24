@@ -2,7 +2,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const express = require('express');
 const next = require('next');
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 3000;
 const nextApp = next({ dev });
 const app = express();
 const handle = nextApp.getRequestHandler();
@@ -12,7 +12,5 @@ nextApp.prepare().then(() => {
   app.listen(PORT, () => {
     console.log(`Connected to port ${PORT}`);
   });
-  app.post('/makeInvoice', () => {
-    
-  })
+  app.post('/makeInvoice', () => {});
 });

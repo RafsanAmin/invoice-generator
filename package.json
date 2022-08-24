@@ -1,12 +1,22 @@
 {
   "name": "invoice-generator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
     "build": "next build",
     "start": "node index.js",
     "lint": "next lint"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "pages/*",
+      "components/*",
+      "public/*",
+      "scss/*",
+      "util/*"
+    ],
+    "delay": "2500"
   },
   "dependencies": {
     "axios": "^0.27.2",

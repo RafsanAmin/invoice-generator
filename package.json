@@ -1,6 +1,6 @@
 {
   "name": "invoice-generator",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",

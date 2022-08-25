@@ -1,3 +1,5 @@
+import randomNumber from './random';
+
 export default {
   date: '',
   from: {
@@ -5,7 +7,7 @@ export default {
     name: '',
     address: '',
     email: '',
-    id: 0,
+    id: randomNumber(10),
   },
   to: {
     name: '',

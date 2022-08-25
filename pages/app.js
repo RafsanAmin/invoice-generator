@@ -1,8 +1,10 @@
 import React, { useEffect, useReducer } from 'react';
+import From from '../components/from';
+import AppContext from '../context/AppContext';
 import init from '../util/init';
 
 const app = () => {
-  const [data, dispatch] = useReducer((prev, action) => {
+  const appState = useReducer((prev, action) => {
     const t = prev[action.form];
     const f = { ...prev };
     switch (action.type) {
@@ -29,27 +31,17 @@ const app = () => {
         return prev;
     }
   }, init);
-  const handle = () => {
-    dispatch({
-      type: 'ITEM_ADD',
-      data: {
-        desc: 'dsd',
-        quan: 11121,
-        unit: 'dsds',
-        uPrice: 15400,
-        tPrice: 135440,
-      },
-    });
-  };
+  const [data] = appState;
   useEffect(() => {
     console.dir(data);
   }, [data]);
   return (
     <div>
-      <button onClick={handle} type="button">
-        dsd
-      </button>
-      <p>See in Console</p>
+      <AppContext.Provider value={appState}>
+        <br />
+        <From />
+        <p>See in Console</p>
+      </AppContext.Provider>
     </div>
   );
 };

@@ -39,7 +39,7 @@
   .item {
     border-bottom: 1px solid $pink;
     font-weight: 300;
-
+    padding-block: 1rem;
     & > div {
       display: grid;
       align-items: center;

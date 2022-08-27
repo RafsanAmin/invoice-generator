@@ -1,0 +1,55 @@
+@import './var';
+.grid {
+  display: grid;
+  min-width: 950px;
+  grid-template-columns: 5fr 2fr 1fr 2fr 2fr;
+  gap: 0.5rem;
+  & > div {
+    width: 100%;
+    text-align: center;
+  }
+}
+.cont {
+  max-width: 100vw;
+  overflow-y: scroll;
+  button {
+    background-color: #fff;
+    color: $pink-dark;
+    border: 1px solid $pink;
+    margin-right: 0.2rem;
+    border-radius: 3px;
+    cursor: pointer;
+    &:hover {
+      background: linear-gradient(90deg, $red-primary 0%, $pink-dark 65%);
+      border: 1px solid transparent;
+      color: #fff;
+    }
+  }
+}
+.head {
+  background: linear-gradient(90deg, $red-primary 0%, $pink-dark 65%);
+  border-radius: 5px;
+  p {
+    color: #fff;
+    font-weight: 600;
+  }
+}
+.itemCont {
+  position: relative;
+  .item {
+    border-bottom: 1px solid $pink;
+    font-weight: 300;
+
+    & > div {
+      display: grid;
+      align-items: center;
+    }
+  }
+  .button {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 1;
+  }
+}

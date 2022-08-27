@@ -1,14 +1,17 @@
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
 import Styles from '../scss/from.module.scss';
-import Input from './form/input';
+import Input from './formUtil/input';
+import TextArea from './formUtil/textarea';
 
 function From() {
   const [d, dispatch] = useContext(AppContext);
   const data = d.from;
   return (
     <div className={Styles.cont}>
-      <div className={Styles.logo} />
+      <div className={Styles.logo}>
+        <img style={{ width: '100%' }} src="/l.png" alt="" />
+      </div>
       <div className={Styles.inputs}>
         <Input
           value={data.name}
@@ -19,7 +22,8 @@ function From() {
           }}
           placeholder="Company Name"
         />
-        <Input
+        <TextArea
+          rows={{ min: 4, max: 4, lineH: 18 }}
           value={data.address}
           setValue={(s) => dispatch({ type: 'INPUT_2', form: 'from', field: 'address', data: s })}
           placeholder="Address"
@@ -35,13 +39,7 @@ function From() {
           value={data.id}
           setValue={(s) => dispatch({ type: 'INPUT_2', form: 'from', field: 'id', data: s })}
           readOnly
-          label="Retailer Id."
-        />
-        <Input
-          value={d.date}
-          setValue={(s) => dispatch({ type: 'INPUT_1', field: 'date', data: s })}
-          type="date"
-          label="Retailer Id."
+          label="Retailer Id. (Auto Generated)"
         />
       </div>
     </div>

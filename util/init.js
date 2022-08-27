@@ -2,6 +2,7 @@ import randomNumber from './random';
 
 export default {
   date: '',
+  id: randomNumber(10),
   from: {
     logo: '',
     name: '',
@@ -13,7 +14,7 @@ export default {
     name: '',
     address: '',
     email: '',
-    id: 0,
+    id: randomNumber(10),
   },
   currency: '',
   items: [
@@ -21,6 +22,41 @@ export default {
       desc: '',
       quan: 0,
       unit: '',
+      uPrice: 0,
+      tPrice: 0,
+    },
+    {
+      desc: 'Your Product Desx',
+      quan: 0,
+      unit: 'pcs',
+      uPrice: 0,
+      tPrice: 0,
+    },
+    {
+      desc: 'Your Product Desx',
+      quan: 0,
+      unit: 'pcs',
+      uPrice: 0,
+      tPrice: 0,
+    },
+    {
+      desc: 'Your Product DesxYour Product DesxYour Product DesxYour Product DesxYour Product DesxYour Product DesxYour Product DesxYour Product DesxYour Product DesxYour Product DesxYour Product DesxYour Product DesxYour Product DesxYour Product Desx',
+      quan: 0,
+      unit: 'pcs',
+      uPrice: 0,
+      tPrice: 0,
+    },
+    {
+      desc: 'Your Product Desx',
+      quan: 0,
+      unit: 'pcs',
+      uPrice: 0,
+      tPrice: 0,
+    },
+    {
+      desc: 'Your Product Desx',
+      quan: 0,
+      unit: 'pcs',
       uPrice: 0,
       tPrice: 0,
     },

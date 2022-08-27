@@ -1,6 +1,12 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
+import Select from '../components/formUtil/select';
 import From from '../components/from';
+import Header from '../components/header';
+import Table from '../components/table/table';
+import To from '../components/to';
 import AppContext from '../context/AppContext';
+import Styles from '../scss/app.module.scss';
+import debounce from '../util/debounce';
 import init from '../util/init';
 
 const app = () => {
@@ -22,24 +28,41 @@ const app = () => {
         f.items.splice(action.index, 1);
         return f;
       case 'ITEM_ADD':
-        f.items.push(action.data);
+        debounce(() => {
+          f.items.push({
+            desc: '',
+            quan: 0,
+            unit: '',
+            uPrice: 0,
+            tPrice: 0,
+          });
+        });
         return f;
       case 'ITEM_EDIT':
-        f.items.splice(action.index, 1, action.data);
+        f.items[action.index][action.field] = action.data;
         return f;
       default:
         return prev;
     }
   }, init);
-  const [data] = appState;
-  useEffect(() => {
-    console.dir(data);
-  }, [data]);
+  // const [data] = appState;
   return (
-    <div>
+    <div className={Styles.supCont}>
       <AppContext.Provider value={appState}>
-        <br />
-        <From />
+        <div className={Styles.cont}>
+          <div className={Styles.top}>
+            <From />
+            <Header />
+          </div>
+          <To />
+          <Select
+            list={[
+              ['s', 's'],
+              ['d', 'd'],
+            ]}
+          />
+          <Table />
+        </div>
         <p>See in Console</p>
       </AppContext.Provider>
     </div>

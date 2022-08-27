@@ -17,7 +17,6 @@ nextApp.prepare().then(() => {
   db.connect(DB_KEY, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
   })
     .then(() => {
       console.log('Connected to db');

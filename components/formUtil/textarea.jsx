@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Styles from '../../scss/text.module.scss';
 
-const textArea = ({ rows, value, setValue, placeholder, limit, update, label }) => {
+function TextArea({ rows, value, setValue, placeholder, limit, update, label, style }) {
   const [oflow, setOflow] = useState(false);
   const Ref = useRef();
   const handleTextArea = (e) => {
@@ -30,7 +30,7 @@ const textArea = ({ rows, value, setValue, placeholder, limit, update, label }) 
       <textarea
         className={`${Styles.input} ${Styles.textarea}`}
         ref={Ref}
-        style={oflow ? { overflowY: 'scroll' } : { overflowY: 'hidden' }}
+        style={oflow ? { overflowY: 'scroll', ...style } : { overflowY: 'hidden', ...style }}
         rows={rows.min}
         value={value}
         onFocus={handleTextArea}
@@ -41,6 +41,6 @@ const textArea = ({ rows, value, setValue, placeholder, limit, update, label }) 
       />
     </div>
   );
-};
+}
 
-export default textArea;
+export default TextArea;

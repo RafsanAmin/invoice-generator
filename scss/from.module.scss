@@ -1,13 +1,11 @@
 @import './var';
 .cont {
   display: grid;
-  width: 50%; // temp
-  grid-template-columns: minmax(20px, auto) auto;
+  grid-template-columns: minmax(160px, 0.5fr) 1fr;
   grid-template-rows: 1fr;
   gap: 1rem;
   .logo {
     aspect-ratio: 1 / 1;
-    background-color: aqua;
     width: 100%;
   }
   .inputs {
@@ -15,5 +13,16 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .cont {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(160px, 30vh) auto;
+    .logo {
+      aspect-ratio: 1 / 1;
+      width: auto;
+      height: 100%;
+    }
   }
 }

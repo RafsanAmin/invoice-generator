@@ -1,0 +1,12 @@
+@import './var';
+.h2 {
+  text-align: right;
+  margin: 0;
+  font-size: 2rem;
+  color: $pink-dark;
+}
+@media only screen and (max-width: 780px) {
+  .h2 {
+    text-align: center;
+  }
+}

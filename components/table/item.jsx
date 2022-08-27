@@ -86,14 +86,16 @@ function Item({ index }) {
         ) : (
           <>
             <div>
-              <pre
+              <p
                 style={{
                   textAlign: 'left',
                   paddingLeft: '4rem',
+                  wordWrap: 'break-word',
+                  whiteSpace: 'pre-wrap',
                 }}
               >
                 {desc}
-              </pre>
+              </p>
             </div>
             <div>
               <p>{quan}</p>

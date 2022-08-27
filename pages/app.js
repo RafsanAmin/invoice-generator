@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import Select from '../components/formUtil/select';
 import From from '../components/from';
 import Header from '../components/header';
@@ -45,6 +45,9 @@ const app = () => {
         return prev;
     }
   }, init);
+  useEffect(() => {
+    appState[1]({ type: 'ITEM_ADD' });
+  }, []);
   // const [data] = appState;
   return (
     <div className={Styles.supCont}>

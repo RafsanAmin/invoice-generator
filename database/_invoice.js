@@ -23,6 +23,7 @@ const invoiceSchema = new Schema({
       unit: String,
       uPrice: Number,
       tPrice: Number,
+      photo: String,
     },
   ],
   subtotal: Number,

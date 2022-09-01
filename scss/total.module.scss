@@ -1,0 +1,19 @@
+@import './var';
+.cont {
+  display: grid;
+  width: 100%;
+  margin-bottom: 1rem;
+  .inner {
+    display: grid;
+    text-align: right;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    justify-items: flex-end;
+    column-gap: 1.5rem;
+    h2 {
+      margin: 0;
+    }
+    .title {
+      color: $pink-dark;
+    }
+  }
+}

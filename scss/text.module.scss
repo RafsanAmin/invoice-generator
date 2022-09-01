@@ -8,13 +8,18 @@
     font-weight: 600;
     margin: 0;
   }
+  & > div {
+    display: flex;
+    align-items: center;
+  }
   .input {
     border: 1px solid $grey-lighter;
     padding: 0.25rem 0.5rem;
     font-size: 1rem;
-    transition: 0.12s linear;
+    transition: 0.12s linear border;
     border-radius: 5px;
     width: 100%;
+    margin-left: 0.25rem;
     &:focus {
       border: 1px solid $pink;
       outline: 0;

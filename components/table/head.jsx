@@ -8,6 +8,9 @@ function Head() {
         <p>Product Description</p>
       </div>
       <div>
+        <p>Photo</p>
+      </div>
+      <div>
         <p>Quantity</p>
       </div>
       <div>

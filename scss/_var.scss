@@ -31,10 +31,29 @@ $red-dark: #d33040;
 $pink-darker: hsl(342, 92%, 47%);
 $pink-dark: hsl(342, 79%, 55%);
 $pink: hsl(342, 94%, 63%);
+$pink-hot: hsl(335, 100%, 60%);
 $pink-light: hsl(342, 100%, 82%);
 $pink-lighter: hsl(342, 73%, 94%);
+$pink-lightest: hsl(340, 100%, 99%);
 
 $yellow-primary: #ffc107;
 $yellow-dark: #996a04;
 $yellow-light: #ffda6a;
 $yellow-lighter: #fce6a6;
+
+@mixin Border($width: 3px) {
+  position: relative;
+  background-color: #fff;
+  border-radius: 9px;
+  &::after {
+    content: '';
+    top: calc(-1 * $width);
+    left: calc(-1 * $width);
+    right: calc(-1 * $width);
+    bottom: calc(-1 * $width);
+    position: absolute;
+    background: linear-gradient(270deg, red 0%, $pink-hot 65%);
+    z-index: -5;
+    border-radius: 12px;
+  }
+}

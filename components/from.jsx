@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import AppContext from '../context/AppContext';
 import Styles from '../scss/from.module.scss';
+import FileHandler from './formUtil/fileHandler';
 import Input from './formUtil/input';
 import TextArea from './formUtil/textarea';
 
@@ -10,7 +11,16 @@ function From() {
   return (
     <div className={Styles.cont}>
       <div className={Styles.logo}>
-        <img style={{ width: '100%' }} src="/l.png" alt="" />
+        <FileHandler
+          photo={d.photos.logo}
+          handler={(e) => {
+            dispatch({ type: 'ADD_LOGO', file: e });
+          }}
+          del={() => {
+            dispatch({ type: 'DEL_LOGO' });
+          }}
+          placeholder="Add You Logo"
+        />
       </div>
       <div className={Styles.inputs}>
         <Input

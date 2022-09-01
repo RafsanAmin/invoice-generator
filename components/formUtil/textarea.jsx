@@ -2,40 +2,54 @@
 import { useEffect, useRef, useState } from 'react';
 import Styles from '../../scss/text.module.scss';
 
-function TextArea({ rows, value, setValue, placeholder, limit, update, label, style }) {
+function TextArea({ rows, value, setValue, placeholder, limit, label, style }) {
   const [oflow, setOflow] = useState(false);
+  const heights = {
+    min: rows.min * rows.lineH,
+    max: rows.max * rows.lineH,
+  };
   const Ref = useRef();
   const handleTextArea = (e) => {
-    const prevRows = e.target.rows;
+    const prevH = e.target.style.height;
+    const scroll = window.scrollY;
+    const setHeight = (s) => {
+      e.target.style.height = `${s}px`;
+    };
+    setHeight(heights.min);
     setOflow(false);
-    e.target.rows = rows.min;
-    const currentRows = ~~(e.target.scrollHeight / rows.lineH);
-    if (currentRows === prevRows) {
-      e.target.rows = currentRows;
-    } else if (currentRows > rows.max) {
+    const currentH = e.target.scrollHeight;
+    console.log(currentH);
+    if (currentH > heights.max) {
       setOflow(true);
-      e.target.rows = rows.max;
-    } else if (currentRows > rows.min) {
-      e.target.rows = currentRows;
+      setHeight(heights.max);
+    } else if (currentH <= heights.min) {
+      setHeight(heights.min);
+    } else if (currentH > heights.min || currentH === prevH) {
+      setHeight(currentH);
     }
+    window.scrollTo(0, scroll);
     setValue(e.target.value);
   };
+
   useEffect(() => {
     Ref.current.focus();
     Ref.current.blur();
-  }, [update]);
+  }, []);
+
   return (
     <div className={Styles.cont}>
       <p>{label}</p>
       <textarea
         className={`${Styles.input} ${Styles.textarea}`}
         ref={Ref}
-        style={oflow ? { overflowY: 'scroll', ...style } : { overflowY: 'hidden', ...style }}
-        rows={rows.min}
+        style={
+          oflow
+            ? { overflowY: 'scroll', ...style, height: `${heights.min}px` }
+            : { overflowY: 'hidden', ...style, height: `${heights.min}px` }
+        }
         value={value}
-        onFocus={handleTextArea}
         onChange={handleTextArea}
-        onMouseEnter={handleTextArea}
+        onKeyUp={handleTextArea}
         placeholder={placeholder}
         maxLength={limit || 1000}
       />

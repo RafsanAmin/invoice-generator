@@ -1,0 +1,65 @@
+@import './var';
+.RadioCont {
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  span {
+    color: $grey-dark;
+    margin-left: 0.5rem;
+  }
+  .radio {
+    display: inline-block;
+    aspect-ratio: 1 / 1;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    transition: 0.15s ease-in-out;
+  }
+  .radioOn {
+    outline: 2px solid $pink-hot;
+    border: 4px solid #fff;
+    background-color: $pink-hot;
+  }
+  .radioOff {
+    outline: 2px solid $grey-light;
+  }
+}
+.cont {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: 3fr 4fr 5fr;
+  margin-bottom: 1rem;
+  align-items: center;
+  gap: 1.5rem;
+  .inner {
+    .radioGroup {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+  }
+
+  @include Border(2px);
+}
+
+@media only screen and (max-width: 520px) {
+  .cont {
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto auto;
+
+    & > div:nth-child(1) {
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
+    }
+
+    & > div:nth-child(2) {
+      grid-row: 2 / 3;
+      grid-column: 1 / 2;
+    }
+
+    & > div:nth-child(3) {
+      grid-row: 1 / 3;
+      grid-column: 2 / 3;
+    }
+  }
+}

@@ -2,7 +2,7 @@
 .grid {
   display: grid;
   min-width: 950px;
-  grid-template-columns: 5fr 2fr 1fr 2fr 2fr;
+  grid-template-columns: 4.5fr 1.875fr 1fr 0.875fr 1.75fr 2fr;
   gap: 0.5rem;
   & > div {
     width: 100%;
@@ -12,22 +12,10 @@
 .cont {
   max-width: 100vw;
   overflow-y: scroll;
-  button {
-    background-color: #fff;
-    color: $pink-dark;
-    border: 1px solid $pink;
-    margin-right: 0.2rem;
-    border-radius: 3px;
-    cursor: pointer;
-    &:hover {
-      background: linear-gradient(90deg, $red-primary 0%, $pink-dark 65%);
-      border: 1px solid transparent;
-      color: #fff;
-    }
-  }
+  padding-left: 1rem;
 }
 .head {
-  background: linear-gradient(90deg, $red-primary 0%, $pink-dark 65%);
+  background: linear-gradient(90deg, $red-primary 0%, $pink-hot 65%);
   border-radius: 5px;
   p {
     color: #fff;

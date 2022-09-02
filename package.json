@@ -14,7 +14,9 @@
       "components/*",
       "public/*",
       "scss/*",
-      "util/*"
+      "util/*",
+      "context/*",
+      "api/*"
     ],
     "delay": "2500"
   },

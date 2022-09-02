@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import AppContext from '../../context/AppContext';
 import Styles from '../../scss/adjuster.module.scss';
+import ELabel from './eLabel';
 import Input from './input';
 
 function Radio({ state, setState, text }) {
@@ -12,14 +13,20 @@ function Radio({ state, setState, text }) {
   );
 }
 
-function Adjuster({ name, header }) {
+function Adjuster({ name, label, labH }) {
   const [d, dispatch] = useContext(AppContext);
   const { perc, amount } = d[name];
   console.log(d, name, perc >= 0);
   const perce = perc !== null && perc >= 0;
   return (
     <div className={Styles.cont}>
-      <h2>{header}</h2>
+      <ELabel
+        style={{
+          fontSize: '1.2rem',
+        }}
+        val={label}
+        hnd={labH}
+      />
       <div className={Styles.inner}>
         <div className={Styles.radioGroup}>
           <Radio
@@ -63,7 +70,7 @@ function Adjuster({ name, header }) {
           fontWeight: '600',
           textAlign: 'right',
         }}
-        prefix="$"
+        prefix={d.currency.symbol}
         setValue={(e) => {
           if (!Number.isNaN(Number(e)) || Number(e) >= 0) {
             dispatch({ type: 'AMNT_SET', field: name, amount: Number(e) });

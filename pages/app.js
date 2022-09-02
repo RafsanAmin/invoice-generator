@@ -15,6 +15,7 @@ import init from '../util/init';
 const app = () => {
   const appState = useReducer((prev, action) => {
     const t = prev[action.form];
+
     const f = { ...prev };
     const countTotal = () => {
       let total = 0;
@@ -41,13 +42,21 @@ const app = () => {
             [action.field]: action.data,
           },
         };
+      case 'TITLE_1':
+        f.title[action.field] = action.data;
+        return f;
+      case 'TITLE_2':
+        f.title[action.form][action.field] = action.data;
+
+        return f;
       case 'ADD_PHOTO_ITEM':
         debounce(() => {
           if (action.file.size > 2 * (2 << 20)) {
             alert('FILE CANT BE MORE THAN 2MB');
             return f;
           }
-          if (action.file.type !== 'image/png' || action !== 'image/jpg') {
+
+          if (action.file.type !== 'image/png' && action !== 'image/jpeg') {
             alert('FILE ONLY CAN BE PNG & JPEG');
             return f;
           }
@@ -113,27 +122,46 @@ const app = () => {
             ]}
           />
           <Table />
-          <Total title="Total" value={appState[0].total} />
+          <Total
+            label={appState[0].title.total}
+            labH={(e) => appState[1]({ type: 'TITLE_1', field: 'total', data: e })}
+            value={appState[0].total}
+          />
           <div className={Styles.bottom}>
             <div>
               <TextArea
                 rows={{ min: 5, max: 7, lineH: 17 }}
-                label="Terms & Conditions"
+                label={appState[0].title.terms}
+                labH={(e) => appState[1]({ type: 'TITLE_1', field: 'terms', data: e })}
                 value={appState[0].terms}
                 setValue={(e) => appState[1]({ type: 'INPUT_1', field: 'terms', data: e })}
               />
               <TextArea
                 rows={{ min: 5, max: 7, lineH: 17 }}
-                label="Notes"
+                label={appState[0].title.note}
+                labH={(e) => appState[1]({ type: 'TITLE_1', field: 'note', data: e })}
                 value={appState[0].note}
                 setValue={(e) => appState[1]({ type: 'INPUT_1', field: 'note', data: e })}
               />
             </div>
 
             <div className={Styles.prices}>
-              <Adjuster header="Discount" name="discount" />
-              <Adjuster header="Tax" name="tax" />
-              <Total size="lg" title="Net Total" value={appState[0].nettotal} />
+              <Adjuster
+                label={appState[0].title.discount}
+                labH={(e) => appState[1]({ type: 'TITLE_1', field: 'discount', data: e })}
+                name="discount"
+              />
+              <Adjuster
+                label={appState[0].title.tax}
+                labH={(e) => appState[1]({ type: 'TITLE_1', field: 'tax', data: e })}
+                name="tax"
+              />
+              <Total
+                size="lg"
+                label={appState[0].title.nettotal}
+                labH={(e) => appState[1]({ type: 'TITLE_1', field: 'nettotal', data: e })}
+                value={appState[0].nettotal}
+              />
             </div>
           </div>
         </div>

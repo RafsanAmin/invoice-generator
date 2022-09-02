@@ -14,7 +14,7 @@ export default function Home() {
       <button type="button">
         <Link href="/app">Click here to see the app</Link>
       </button>
-      <iframe src="/index/htm" width="1400" title="model" />
+      <iframe src="/index.htm" width="1400" title="model" />
     </div>
   );
 }

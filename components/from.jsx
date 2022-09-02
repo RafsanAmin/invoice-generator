@@ -37,19 +37,20 @@ function From() {
           value={data.address}
           setValue={(s) => dispatch({ type: 'INPUT_2', form: 'from', field: 'address', data: s })}
           placeholder="Address"
-          label="Address"
+          label={d.title.from.address}
+          labH={(s) => dispatch({ type: 'TITLE_2', form: 'from', field: 'address', data: s })}
         />
         <Input
           value={data.email}
           setValue={(s) => dispatch({ type: 'INPUT_2', form: 'from', field: 'email', data: s })}
-          placeholder="E-mail"
-          label="E-mail"
+          label={d.title.from.email}
+          labH={(s) => dispatch({ type: 'TITLE_2', form: 'from', field: 'email', data: s })}
         />
         <Input
           value={data.id}
           setValue={(s) => dispatch({ type: 'INPUT_2', form: 'from', field: 'id', data: s })}
-          readOnly
-          label="Retailer Id. (Auto Generated)"
+          label={d.title.from.id}
+          labH={(s) => dispatch({ type: 'TITLE_2', form: 'from', field: 'id', data: s })}
         />
       </div>
     </div>

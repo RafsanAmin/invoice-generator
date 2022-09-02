@@ -63,7 +63,7 @@ function Item({ index }) {
         </div>
         <div>
           <Input
-            prefix="$"
+            prefix={d.currency.symbol}
             value={`${uPrice}`}
             style={{ textAlign: 'right' }}
             setValue={(s) => {
@@ -74,7 +74,7 @@ function Item({ index }) {
           />
         </div>
         <Input
-          prefix="$"
+          prefix={d.currency.symbol}
           style={{ textAlign: 'right' }}
           value={`${tPrice}`}
           setValue={() => {}}

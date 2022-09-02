@@ -1,10 +1,23 @@
 import React from 'react';
 import Styles from '../../scss/text.module.scss';
+import ELabel from './eLabel';
 
-function Input({ value, setValue, placeholder, style, label, type, readOnly, prefix, contStyle }) {
+function Input({
+  value,
+  setValue,
+  placeholder,
+  style,
+  label,
+  type,
+  readOnly,
+  prefix,
+  contStyle,
+  labH,
+}) {
+  console.log('label', label);
   return (
     <div style={contStyle} className={Styles.cont}>
-      {label ? <p>{label}</p> : null}
+      {label && <ELabel val={label} hnd={labH} />}
       <div>
         <span>{prefix}</span>
         <input

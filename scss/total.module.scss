@@ -1,14 +1,17 @@
 @import './var';
 .cont {
   display: grid;
+  place-items: end;
   width: 100%;
   margin-bottom: 1rem;
+
   .inner {
     display: grid;
     text-align: right;
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
     justify-items: flex-end;
     column-gap: 1.5rem;
+    width: clamp(300px, 50%, 600px);
     h2 {
       margin: 0;
     }

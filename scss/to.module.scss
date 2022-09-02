@@ -10,11 +10,12 @@
     width: 100%;
     padding: 1.5rem;
     @include Border;
-    h2 {
+    .h2 {
       position: absolute;
       font-size: 1.3rem;
-      top: -36px;
+      top: -20px;
       left: 2.5rem;
+      max-width: 200px;
       padding-inline: 0.5rem;
       background: linear-gradient(90deg, red 0%, $pink-hot 65%);
       background-clip: text;

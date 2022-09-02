@@ -1,17 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AppContext from '../context/AppContext';
 import Styles from '../scss/total.module.scss';
+import ELabel from './formUtil/eLabel';
 
-function Total({ title, value, size }) {
+function Total({ label, labH, value, size }) {
+  const [d] = useContext(AppContext);
   return (
     <div className={Styles.cont}>
       <div className={Styles.inner}>
-        <h2 style={{ fontSize: size === 'lg' ? '2rem' : '1.7rem' }} className={Styles.title}>
-          {title}
-        </h2>
+        <ELabel
+          style={{
+            fontSize: size === 'lg' ? '2rem' : '1.7rem',
+            color: 'hsl(342, 79%, 55%)',
+            textAlign: 'right',
+          }}
+          val={label}
+          hnd={labH}
+        />
         <h2
           style={{ fontSize: size === 'lg' ? '2rem' : '1.7rem' }}
           className={Styles.val}
-        >{`$ ${value}`}</h2>
+        >{`${d.currency.symbol} ${value}`}</h2>
       </div>
     </div>
   );

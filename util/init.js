@@ -7,6 +7,37 @@ export default {
     logo: '',
     items: {},
   },
+  title: {
+    main: 'INVOICE',
+    id: 'Invoice Number',
+    date: 'Invoice Date',
+    from: {
+      address: 'Address',
+      email: 'E-mail',
+      id: 'Retailer Id.',
+    },
+    to: {
+      main: 'Invoice To',
+      name: 'Client Name',
+      address: 'Address',
+      email: 'E-mail',
+      id: 'Client Id',
+    },
+    items: {
+      desc: 'Product Description',
+      photo: 'Photo',
+      quan: 'Quantity',
+      unit: 'Unit',
+      uPrice: 'Unit Price',
+      tPrice: 'Total Price',
+    },
+    terms: 'Terms & Conditions',
+    note: 'Notes',
+    tax: 'Tax',
+    discount: 'Discount',
+    total: 'Total',
+    nettotal: 'Net Total',
+  },
   from: {
     name: '',
     address: '',
@@ -19,7 +50,9 @@ export default {
     email: '',
     id: randomNumber(10),
   },
-  currency: '',
+  currency: {
+    symbol: '৳',
+  },
   items: [
     {
       desc: '',

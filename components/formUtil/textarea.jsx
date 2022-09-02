@@ -1,8 +1,9 @@
 /* eslint-disable no-bitwise */
 import { useEffect, useRef, useState } from 'react';
 import Styles from '../../scss/text.module.scss';
+import ELabel from './eLabel';
 
-function TextArea({ rows, value, setValue, placeholder, limit, label, style }) {
+function TextArea({ rows, value, setValue, placeholder, limit, label, style, labH }) {
   const [oflow, setOflow] = useState(false);
   const heights = {
     min: rows.min * rows.lineH,
@@ -38,7 +39,7 @@ function TextArea({ rows, value, setValue, placeholder, limit, label, style }) {
 
   return (
     <div className={Styles.cont}>
-      <p>{label}</p>
+      {label && <ELabel val={label} hnd={labH} />}
       <textarea
         className={`${Styles.input} ${Styles.textarea}`}
         ref={Ref}

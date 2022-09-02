@@ -45,7 +45,7 @@ function FileHandler({ photo, handler, del, placeholder }) {
               }}
               type="button"
             >
-              <i className="fas fa-times    " />
+              <i className="fas fa-times" />
             </button>
           </div>
         </>

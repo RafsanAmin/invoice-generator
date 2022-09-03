@@ -3,4 +3,12 @@
 .select {
   border: 1px solid $grey-light;
   background-color: #fff;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  &:focus {
+    border: 1px solid $pink-hot;
+  }
 }

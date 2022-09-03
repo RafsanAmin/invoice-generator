@@ -1,15 +1,24 @@
 import React from 'react';
 import Styles from '../../scss/select.module.scss';
+import ELabel from './eLabel';
 
-function Select({ list }) {
+function Select({ list, handle, active }) {
   return (
-    <select className={Styles.select}>
-      {list.map((dt) => (
-        <option key={Math.random()} value={dt[0]}>
-          {dt[1]}
-        </option>
-      ))}
-    </select>
+    <>
+      <ELabel val="Currency" hnd={() => {}} readOnly style={{ border: 0 }} />
+      <select
+        className={Styles.select}
+        onChange={(e) => {
+          handle(list[e.target.value][0], e.target.value);
+        }}
+      >
+        {list.map((dt, index) => (
+          <option key={Math.random()} value={index} selected={Number(active) === index}>
+            {dt[1]}
+          </option>
+        ))}
+      </select>
+    </>
   );
 }
 

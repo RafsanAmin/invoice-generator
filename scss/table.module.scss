@@ -10,9 +10,9 @@
   }
 }
 .cont {
-  max-width: 100vw;
-  overflow-y: scroll;
-  padding-left: 1rem;
+  max-width: 95vw;
+  overflow-y: clip;
+  overflow-x: scroll;
 }
 .head {
   background: linear-gradient(90deg, $red-primary 0%, $pink-hot 65%);

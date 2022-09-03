@@ -36,7 +36,6 @@ function From() {
           rows={{ min: 4, max: 4, lineH: 18 }}
           value={data.address}
           setValue={(s) => dispatch({ type: 'INPUT_2', form: 'from', field: 'address', data: s })}
-          placeholder="Address"
           label={d.title.from.address}
           labH={(s) => dispatch({ type: 'TITLE_2', form: 'from', field: 'address', data: s })}
         />

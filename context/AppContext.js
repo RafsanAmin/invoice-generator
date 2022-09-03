@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import init from '../util/init';
+import { init } from '../state/appState';
 
 const AppContext = createContext(init);
 

@@ -23,6 +23,7 @@ function Header() {
       <Input
         value={d.date}
         setValue={(s) => dispatch({ type: 'INPUT_1', field: 'date', data: s })}
+        style={{ backgroundColor: '#fff' }}
         type="date"
         label={d.title.date}
         labH={(s) => dispatch({ type: 'TITLE_1', field: 'date', data: s })}

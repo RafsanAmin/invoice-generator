@@ -31,7 +31,6 @@ function To() {
               fontSize: '1.2rem',
             }}
             setValue={(s) => dispatch({ type: 'INPUT_2', form: 'to', field: 'name', data: s })}
-            placeholder="Client Name"
             label={d.title.to.name}
             labH={(s) => dispatch({ type: 'TITLE_2', form: 'to', field: 'name', data: s })}
           />{' '}
@@ -41,7 +40,6 @@ function To() {
               fontSize: '1.2rem',
             }}
             setValue={(s) => dispatch({ type: 'INPUT_2', form: 'to', field: 'id', data: s })}
-            placeholder="Client Id"
             label={d.title.to.id}
             labH={(s) => dispatch({ type: 'TITLE_2', form: 'to', field: 'id', data: s })}
           />
@@ -51,7 +49,6 @@ function To() {
               fontSize: '1.2rem',
             }}
             setValue={(s) => dispatch({ type: 'INPUT_2', form: 'to', field: 'email', data: s })}
-            placeholder="Email"
             label={d.title.to.email}
             labH={(s) => dispatch({ type: 'TITLE_2', form: 'to', field: 'email', data: s })}
           />
@@ -67,7 +64,6 @@ function To() {
             fontSize: '1.2rem',
           }}
           setValue={(s) => dispatch({ type: 'INPUT_2', form: 'to', field: 'address', data: s })}
-          placeholder="Address"
           label={d.title.to.address}
           labH={(s) => dispatch({ type: 'TITLE_2', form: 'to', field: 'address', data: s })}
         />{' '}

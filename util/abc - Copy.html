@@ -1,9 +1,6 @@
-const pdf = require('html-pdf-node');
-const fs = require('fs');
 
-const pdfMaker = (data) => `
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -42,7 +39,6 @@ const pdfMaker = (data) => `
           Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
         margin: 0;
         padding: 0;
-        font-style: normal;
       }
       *:focus,
       *:active {
@@ -210,67 +206,68 @@ const pdfMaker = (data) => `
         color: var(--pink-darker);
       }
     </style>
-    </head>
+    <link href="./style.css" rel="stylesheet" />
+  </head>
   <body>
     <div>
       <div class="top">
         <div class="from">
           <div class="logo">
-            <img src="${data?.photos.logo}" width="210" />
+            <img src="" width="210" />
           </div>
           <div class="inputs">
-            <h1>${data.from.name}</h1>
+            <h1>fdsadfas</h1>
             <div>
-              <h4>${data.title.from.address}: </h4>
+              <h4>Address: </h4>
               <p>
-                ${data.from.address}
+                dfasdfas
               </p>
             </div>
             <div>
-              <h4>${data.title.from.email}: </h4>
-              <p>${data.from.email}</p>
+              <h4>E-mail: </h4>
+              <p>dasdasfasdf</p>
             </div>
             <div>
-              <h4>${data.title.from.id}: </h4>
-              <p>${data.from.id}</p>
+              <h4>Retailer Id.: </h4>
+              <p>8358279750</p>
             </div>
           </div>
         </div>
         <div class="header">
-          <h2>${data.title.main}</h2>
+          <h2>INVOICE</h2>
           <div class="ainputs">
             <div>
-              <h4>${data.title.id}:</h4>
-              <h4>${data.title.date}:</h4>
+              <h4>Invoice Number:</h4>
+              <h4>Invoice Date:</h4>
             </div>
             <div>
-              <p>${data.id}</p>
-              <p>${data.date}</p>
+              <p>2521895539</p>
+              <p></p>
             </div>
           </div>
         </div>
       </div>
       <div class="to">
-        <h2>${data.title.to.main}</h2>
+        <h2>Invoice To</h2>
         <div class="inputsUD">
           <div>
-            <h4>${data.title.to.name}</h4>
-            <p>${data.to.name}</p>
+            <h4>Client Name</h4>
+            <p>dasffff</p>
           </div>
           <div>
-            <h4>${data.title.to.id}</h4>
-            <p>${data.to.id}</p>
+            <h4>Client Id</h4>
+            <p>8752755785</p>
           </div>
           <div>
-            <h4>${data.title.to.email}</h4>
-            <p>${data.to.email}</p>
+            <h4>E-mail</h4>
+            <p>dasdadad</p>
           </div>
         </div>
         <div class="inputsUD sp">
           <div>
-            <h4>${data.title.to.address}</h4>
+            <h4>Address</h4>
             <p>
-              ${data.to.address}
+              fsdaaaaa
             </p>
           </div>
         </div>
@@ -285,66 +282,82 @@ const pdfMaker = (data) => `
       <div class="table">
         <div class="head">
           <div>
-            <p>${data.title.items.desc}</p>
+            <p>Product Description</p>
           </div>
           <div>
-            <p>${data.title.items.photo}</p>
+            <p>Photo</p>
           </div>
           <div>
-            <p>${data.title.items.quan}</p>
+            <p>Quantity</p>
           </div>
           <div>
-            <p>${data.title.items.unit}</p>
+            <p>Unit</p>
           </div>
           <div>
-            <p>${data.title.items.uPrice}</p>
+            <p>Unit Price</p>
           </div>
           <div>
-            <p>${data.title.items.tPrice}</p>
+            <p>Total Price</p>
           </div>
         </div>
-        ${data.items
-          .map(
-            (elem, ind) => `
+        
           <div class="item">
           <div>
-            <p style="text-align: left">${elem.desc}</p>
+            <p style="text-align: left">dfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfas</p>
           </div>
 
-          <img src="${data?.photos.items[ind]}" alt="" />
+          <img src="undefined" alt="" />
 
           <div>
-            <p>${elem.quan}</p>
+            <p>52</p>
           </div>
           <div>
-            <p>${elem.unit}</p>
+            <p></p>
           </div>
           <div>
-            <p>${data.currency.symbol} ${elem.uPrice}</p>
+            <p>$ 15800</p>
           </div>
           <div>
-            <p>${data.currency.symbol} ${elem.tPrice}</p>
+            <p>$ 821600</p>
           </div>
-        </div>`
-          )
-          .join('')}
+        </div>
+          <div class="item">
+          <div>
+            <p style="text-align: left">dasfafdfasa</p>
+          </div>
+
+          <img src="undefined" alt="" />
+
+          <div>
+            <p>522</p>
+          </div>
+          <div>
+            <p></p>
+          </div>
+          <div>
+            <p>$ 150</p>
+          </div>
+          <div>
+            <p>$ 78300</p>
+          </div>
+        </div>
 
       </div>
       <div class="bottom">
         <div class="left">
           <div class="inputsUD spp">
             <div>
-              <h4>${data.title.terms}</h4>
+              <h4>Terms & Conditions</h4>
               <p>
-               ${data.terms}
+               dasfa
               </p>
             </div>
           </div>
           <div class="inputsUD spp">
             <div>
-              <h4>${data.title.note}</h4>
+              <h4>Notes</h4>
               <p>
-                ${data.note}
+                fdsds
               </p>
             </div>
           </div>
@@ -352,20 +365,16 @@ const pdfMaker = (data) => `
         <div class="right">
           <div class="ainputs b">
             <div>
-              <h3>${data.title.total}:</h3>
-              <h3>${data.title.discount}  ${
-  data.discount.perc ? `(${data.discount.perc}%)` : ''
-}:</h3>
-              <h3>${data.title.tax} ${data.tax.perc ? `(${data.tax.perc}%)` : ''}:</h3>
-              <h1>${data.title.nettotal}:</h1>
+              <h3>Total:</h3>
+              <h3>Discount  (15%):</h3>
+              <h3>Tax :</h3>
+              <h1>Net Total:</h1>
             </div>
             <div>
-              <p>${data.currency.symbol} ${data.total}</p>
-              <p>${data.currency.symbol} ${data.discount.amount}</p>
-              <p>${data.currency.symbol} ${data.tax.amount}</p>
-              <h1 style="color: #000; text-align: right">${data.currency.symbol} ${
-  data.nettotal
-}</h1>
+              <p>$ 899900</p>
+              <p>$ 134985</p>
+              <p>$ 150</p>
+              <h1 style="color: #000; text-align: right">$ 765065</h1>
             </div>
           </div>
         </div>
@@ -381,97 +390,3 @@ const pdfMaker = (data) => `
     </div>
   </body>
 </html>
-`;
-
-const x = pdfMaker({
-  date: '',
-  id: 2521895539,
-  photos: {
-    logo: '',
-    items: {},
-  },
-  title: {
-    main: 'INVOICE',
-    id: 'Invoice Number',
-    date: 'Invoice Date',
-    from: {
-      address: 'Address',
-      email: 'E-mail',
-      id: 'Retailer Id.',
-    },
-    to: {
-      main: 'Invoice To',
-      name: 'Client Name',
-      address: 'Address',
-      email: 'E-mail',
-      id: 'Client Id',
-    },
-    items: {
-      desc: 'Product Description',
-      photo: 'Photo',
-      quan: 'Quantity',
-      unit: 'Unit',
-      uPrice: 'Unit Price',
-      tPrice: 'Total Price',
-    },
-    terms: 'Terms & Conditions',
-    note: 'Notes',
-    tax: 'Tax',
-    discount: 'Discount',
-    total: 'Total',
-    nettotal: 'Net Total',
-  },
-  from: {
-    name: 'fdsadfas',
-    address: 'dfasdfas',
-    email: 'dasdasfasdf',
-    id: 8358279750,
-  },
-  to: {
-    name: 'dasffff',
-    address: 'fsdaaaaa',
-    email: 'dasdadad',
-    id: 8752755785,
-  },
-  currency: {
-    symbol: '$',
-  },
-  items: [
-    {
-      desc: 'dfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfas',
-      quan: '52',
-      unit: '',
-      uPrice: '15800',
-      tPrice: 821600,
-    },
-    {
-      desc: 'dasfafdfasa',
-      quan: '522',
-      unit: '',
-      uPrice: '150',
-      tPrice: 78300,
-    },
-  ],
-  tax: {
-    perc: null,
-    amount: 150,
-  },
-  discount: {
-    perc: 15,
-    amount: 134985,
-  },
-  nettotal: 765065,
-  total: 899900,
-  terms: ['dasfa'],
-  note: ['fdsds'],
-});
-
-// console.log(x);
-// fs.writeFileSync(`${__dirname}/abc.html`, x, {
-//   encoding: 'utf-8',
-// });
-pdf.generatePdf({ content: x }, { format: 'A4' }).then((pdfBuffer) => {
-  fs.writeFileSync(`${__dirname}/a.pdf`, pdfBuffer);
-});
-
-// module.exports = pdfMaker;

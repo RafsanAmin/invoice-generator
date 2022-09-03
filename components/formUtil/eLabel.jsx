@@ -1,7 +1,7 @@
 import React from 'react';
 import Styles from '../../scss/text.module.scss';
 
-function ELabel({ val, hnd, style }) {
+function ELabel({ val, hnd, style, readOnly }) {
   return (
     <div className={Styles.eLabel}>
       <input
@@ -10,6 +10,7 @@ function ELabel({ val, hnd, style }) {
         onChange={(e) => {
           hnd(e.target.value);
         }}
+        readOnly={readOnly || false}
       />
     </div>
   );

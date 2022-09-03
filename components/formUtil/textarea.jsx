@@ -39,7 +39,7 @@ function TextArea({ rows, value, setValue, placeholder, limit, label, style, lab
 
   return (
     <div className={Styles.cont}>
-      {label && <ELabel val={label} hnd={labH} />}
+      {label || labH ? <ELabel val={label} hnd={labH} /> : null}
       <textarea
         className={`${Styles.input} ${Styles.textarea}`}
         ref={Ref}

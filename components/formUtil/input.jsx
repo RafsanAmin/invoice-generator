@@ -17,7 +17,7 @@ function Input({
   console.log('label', label);
   return (
     <div style={contStyle} className={Styles.cont}>
-      {label && <ELabel val={label} hnd={labH} />}
+      {label || labH ? <ELabel val={label} hnd={labH} /> : null}
       <div>
         <span>{prefix}</span>
         <input

@@ -17,10 +17,10 @@ function Total({ label, labH, value, size }) {
           val={label}
           hnd={labH}
         />
-        <h2
-          style={{ fontSize: size === 'lg' ? '2rem' : '1.7rem' }}
-          className={Styles.val}
-        >{`${d.currency.symbol} ${value}`}</h2>
+        <h2 style={{ fontSize: size === 'lg' ? '2rem' : '1.7rem' }} className={Styles.val}>
+          <span style={{ fontWeight: '400' }}>{d.currency.symbol}</span>
+          {` ${value}`}
+        </h2>
       </div>
     </div>
   );

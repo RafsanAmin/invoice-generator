@@ -1,3 +1,4 @@
+import Router from 'next/router';
 import React, { useEffect, useReducer, useState } from 'react';
 import Adjuster from '../../components/formUtil/adjuster';
 import Select from '../../components/formUtil/select';
@@ -13,13 +14,13 @@ import Styles from '../../scss/app.module.scss';
 import API from '../../api/api';
 import Loading from '../../components/loading';
 import { init, reducer } from '../../state/appState';
-import url from '../../util/baseUrl';
 import currency from '../../util/currency.json';
 
 const app = ({ data, error }) => {
   const appState = useReducer(reducer, init);
   const [load, setLoad] = useState(false);
   useEffect(() => {
+    console.log(data);
     appState[1]({ type: 'INIT', init: data });
   }, []);
   return !error ? (
@@ -27,6 +28,15 @@ const app = ({ data, error }) => {
       <div className={Styles.supCont}>
         <AppContext.Provider value={appState}>
           <div className={Styles.button}>
+            <button
+              type="button"
+              style={{ fontSize: '1.2rem' }}
+              onClick={() => {
+                Router.push('/');
+              }}
+            >
+              <i className="fas fa-home" /> Go Home
+            </button>
             <button
               type="button"
               style={{ fontSize: '1.2rem' }}
@@ -52,7 +62,6 @@ const app = ({ data, error }) => {
               Save
             </button>
           </div>
-          <hr style={{ width: '100%' }} />
           <div className={Styles.cont}>
             <div className={Styles.top}>
               <From />
@@ -114,7 +123,6 @@ const app = ({ data, error }) => {
               </div>
             </div>
           </div>
-          <hr />
         </AppContext.Provider>
       </div>
     </Loading>
@@ -135,13 +143,7 @@ const app = ({ data, error }) => {
 app.getInitialProps = async (ctx) => {
   try {
     const c = ctx.query.id;
-    let data;
-    if (c === 'new') {
-      const dt = await API.createInvoice(init);
-      ctx.res.redirect(`${url}app/${dt._id}`);
-    } else {
-      data = await API.getInvoice(c);
-    }
+    const data = await API.getInvoice(c);
     return { data };
   } catch (err) {
     console.log(err);

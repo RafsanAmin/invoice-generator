@@ -86,6 +86,7 @@ nextApp.prepare().then(() => {
   app.get('/get-invoice', async (req, res) => {
     try {
       const x = await InvoiceDB.findById(req.query._id).select(['-pdf', '-__v']);
+      console.log(x);
       res.json(x);
     } catch (err) {
       console.error(err);

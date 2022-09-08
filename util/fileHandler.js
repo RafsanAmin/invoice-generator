@@ -5,7 +5,7 @@ const fileHandler = (req) =>
   new Promise((resolve) => {
     const respData = {
       logo: '',
-      items: {},
+      items: { 0: '', 1: '', 2: '', 3: '', 4: '' },
     };
     req.pipe(req.busboy);
     req.busboy.on('file', (fieldname, file) => {

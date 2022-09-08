@@ -2,6 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import Axios from 'axios';
 import baseURL from '../util/baseUrl';
+import debounce from '../util/debounce';
 
 Axios.defaults.baseURL = baseURL;
 
@@ -28,6 +29,7 @@ const API = {
   saveInvoice(data) {
     return new Promise((resolve, reject) => {
       this.savePhotos(data.photos).then((photos) => {
+        console.log('photodsadd---', photos);
         Axios.post('/save-invoice', { ...data, photos })
           .then((res) => {
             const id = res.data._id;
@@ -44,6 +46,7 @@ const API = {
       Axios.post('/add-invoice', data)
         .then((res) => {
           const dt = res.data;
+          this.Invoices.add({ id: dt });
           resolve(dt);
         })
         .catch((err) => {
@@ -63,6 +66,27 @@ const API = {
           reject(err);
         });
     });
+  },
+  Invoices: {
+    get() {
+      if (!localStorage.getItem('invoices')) {
+        localStorage.setItem('invoices', JSON.stringify([]));
+      }
+      return JSON.parse(localStorage.getItem('invoices'));
+    },
+    add(data) {
+      const temp = this.get();
+      temp.push(data);
+      return localStorage.setItem('invoices', JSON.stringify(temp));
+    },
+    del(index) {
+      debounce(() => {
+        const temp = this.get();
+        temp.splice(index, 1);
+        console.log(temp);
+        return localStorage.setItem('invoices', JSON.stringify(temp));
+      });
+    },
   },
 };
 

@@ -39,3 +39,40 @@ button {
     color: #fff;
   }
 }
+hr {
+  width: 100%;
+  height: 0px;
+}
+.index_page {
+  padding: 2rem;
+  h1 {
+    border-left: 0.5rem solid $pink;
+    padding-left: 1rem;
+  }
+  .list_cont {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 410px));
+    gap: 1rem;
+    margin-top: 2rem;
+
+    & > div {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+  .list {
+    border: 1px solid $pink-hot;
+    padding: 0 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    span {
+      color: $pink-dark;
+      font-weight: 600;
+      padding-right: 1rem;
+    }
+
+    &:hover {
+      background-color: $pink-lightest;
+    }
+  }
+}

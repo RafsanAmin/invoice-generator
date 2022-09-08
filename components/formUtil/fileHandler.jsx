@@ -29,7 +29,7 @@ function FileHandler({ photo, handler, del, placeholder }) {
         handler(e.dataTransfer.files[0]);
       }}
     >
-      {!photo ? (
+      {!photo || photo === 'undefined' ? (
         <div>
           <i className={`fas fa-images ${Styles.mainIcon}`} />
           <span>{placeholder || 'Add Your Image'}</span>

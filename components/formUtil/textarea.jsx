@@ -19,7 +19,6 @@ function TextArea({ rows, value, setValue, placeholder, limit, label, style, lab
     setHeight(heights.min);
     setOflow(false);
     const currentH = e.target.scrollHeight;
-    console.log(currentH);
     if (currentH > heights.max) {
       setOflow(true);
       setHeight(heights.max);

@@ -16,7 +16,6 @@ function Radio({ state, setState, text }) {
 function Adjuster({ name, label, labH }) {
   const [d, dispatch] = useContext(AppContext);
   const { perc, amount } = d[name];
-  console.log(d, name, perc >= 0);
   const perce = perc !== null && perc >= 0;
   return (
     <div className={Styles.cont}>

@@ -1,5 +1,56 @@
-const pdf = require('html-pdf-node');
+const puppeteer = require('puppeteer');
+const Promise = require('bluebird');
+const hb = require('handlebars');
+const inlineCss = require('inline-css');
 
+async function generatePdf(file, opt, callback) {
+  const options = opt;
+  let args = ['--no-sandbox', '--disable-setuid-sandbox'];
+  if (options.args) {
+    args = options.args;
+    delete options.args;
+  }
+
+  const browser = await puppeteer.launch({
+    args,
+    headless: !opt.debug,
+  });
+  const page = await browser.newPage();
+
+  if (file.content) {
+    const data = await inlineCss(file.content, { url: '/' });
+    const template = hb.compile(data, { strict: true });
+    const result = template(data);
+    const html = result;
+
+    // We set the page content as the generated html by handlebars
+    await page.setContent(html, {
+      waitUntil: 'networkidle0', // wait for page to load completely
+    });
+  } else {
+    await page.goto(file.url, {
+      waitUntil: ['load', 'networkidle0'], // wait for page to load completely
+    });
+  }
+  if (options.autoHeightAndSinglePage) {
+    await page.setViewport({
+      width: options.widthViewport, // special width in integer for autoHeightAndSinglePage
+      height: 1,
+      deviceScaleFactor: 1,
+    });
+    const height = await page.evaluate(() => document.documentElement.offsetHeight); // sir, -auto-height who wants
+    options.height = height;
+    options.width = `${String(options.widthViewport)}px`;
+    options.pageRanges = '1';
+  }
+
+  return Promise.props(page.pdf(options))
+    .then(async (data) => {
+      await browser.close();
+      return Buffer.from(Object.values(data));
+    })
+    .asCallback(callback);
+}
 const pdfMaker = (data) =>
   new Promise((resolve, reject) => {
     const htmlContent = `
@@ -65,13 +116,18 @@ const pdfMaker = (data) =>
           .top {
             display: flex;
             justify-content: space-between;
+            gap: 1rem
           }
           .from {
             display: flex;
             max-width: 60%;
+            gap: 1rem;
           }
           .from h1 {
             font-size: 2rem;
+          }
+          .from img{
+            padding: 1rem;
           }
           .inputs {
             display: flex;
@@ -241,7 +297,9 @@ const pdfMaker = (data) =>
           <div class="top">
             <div class="from">
               <div class="logo">
-                <img src="${data?.photos.logo}" width="210" />
+                <img src="https://res.cloudinary.com/dyjrfa6c2/image/upload/invoice/${
+                  data?.photos.logo
+                }" width="210" />
               </div>
               <div class="inputs">
                 <h1>${data.from.name}</h1>
@@ -332,7 +390,7 @@ const pdfMaker = (data) =>
                 <p style="text-align: left; white-space: pre-wrap">${elem.desc}</p>
               </div>
               <div>
-                <img src="${data?.photos.items[ind]}" alt="" />
+                <img src="https://res.cloudinary.com/dyjrfa6c2/image/upload/invoice/${data?.photos.items[ind]}" alt="No Image" />
               </div>
               <div>
                 <p>${elem.quan}</p>
@@ -400,14 +458,14 @@ const pdfMaker = (data) =>
     </html>
 
     `;
-    pdf
-      .generatePdf(
-        { content: htmlContent },
-        {
-          width: '1400px',
-          autoHeight: true,
-        }
-      )
+    generatePdf(
+      { content: htmlContent },
+      {
+        widthViewport: 1550,
+        autoHeightAndSinglePage: true,
+        printBackground: true,
+      }
+    )
       .then((pdfBuffer) => {
         resolve(pdfBuffer);
       })
@@ -416,95 +474,4 @@ const pdfMaker = (data) =>
       });
   });
 
-pdfMaker({
-  date: '12 / 02 / 2022',
-  id: 2521895539,
-  photos: {
-    logo: '',
-    items: {},
-  },
-  title: {
-    main: 'INVOICE',
-    id: 'Invoice Number',
-    date: 'Invoice Date',
-    from: {
-      address: 'Address',
-      email: 'E-mail',
-      id: 'Retailer Id.',
-    },
-    to: {
-      main: 'Invoice To',
-      name: 'Client Name',
-      address: 'Address',
-      email: 'E-mail',
-      id: 'Client Id',
-    },
-    items: {
-      desc: 'Product Description DescriptionDescriptionDescriptionDescriptionDescriptionDescription',
-      photo: 'My Images DescriptionDescriptionDescriptionDescriptionDescriptionDescription',
-      quan: 'Quantity DescriptionDescriptionDescriptionDescriptionDescription',
-      unit: 'Unit DescriptionDescriptionDescription',
-      uPrice: 'Unit Price  DescriptionDescriptionDescription',
-      tPrice: 'Total Price  DescriptionDescriptionDescription',
-    },
-    terms: 'Terms & Conditions',
-    note: 'Notes',
-    tax: 'TaDescriptionDescriptionx',
-    discount: 'DiscouDescriptionDescriptionnt',
-    total: 'ToDescriptionDescriptiontal',
-    nettotal: 'Net DescriptionDescriptionTotal',
-  },
-  from: {
-    name: 'fdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-    address:
-      'fdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssfdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-    email: 'fdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-    id: 8358279750,
-  },
-  to: {
-    name: 'fdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-    address:
-      'fdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssfdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssfdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-    email: 'fdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-    id: 8752755785,
-  },
-  currency: {
-    symbol: '$',
-  },
-  items: [
-    {
-      desc: 'dfasdfasdfa\n    >sdfasdfasdfasdfasdfasdfa\n    >sdfasdfasdfas',
-      quan: '52',
-      unit: 'pcs',
-      uPrice: '15800',
-      tPrice: 821600,
-    },
-    {
-      desc: 'fdsadfassss\n    >sssssssssssssssssssssssssssssssssss\n    >sssssssssssssssssssssssssssssssssssssss',
-      quan: '522',
-      unit: 'pcs',
-      uPrice: '150',
-      tPrice: 78300,
-    },
-  ],
-  tax: {
-    perc: null,
-    amount: 150,
-  },
-  discount: {
-    perc: 15,
-    amount: 134985,
-  },
-  nettotal: 765065,
-  total: 899900,
-  terms: [
-    'fdsadfassssssssss\n   >  ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssfdsadfassss\n    > ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssfdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-  ],
-  note: [
-    'fdsadfasssssssssssssssssssssssss\n    >\n    >ssssssssssssssssssssssssssssssssssssssssss\n    >sssssssssssfdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssfdsadfassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-  ],
-}).then((ef) => {
-  require('fs').writeFileSync(`${__dirname}/name.pdf`, ef);
-});
-
-// module.exports = pdfMaker;
+module.exports = pdfMaker;

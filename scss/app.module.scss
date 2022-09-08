@@ -7,7 +7,10 @@
   .cont {
     width: 95%;
     max-width: 1100px;
-
+    .button {
+      display: flex;
+      gap: 1rem;
+    }
     .top {
       width: 100%;
       display: grid;

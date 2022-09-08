@@ -36,7 +36,14 @@ function FileHandler({ photo, handler, del, placeholder }) {
         </div>
       ) : (
         <>
-          <img src={URL.createObjectURL(photo)} alt="" />
+          <img
+            src={
+              typeof photo === 'string'
+                ? `https://res.cloudinary.com/dyjrfa6c2/image/upload/invoice/${photo}`
+                : URL.createObjectURL(photo)
+            }
+            alt=""
+          />
           <div className={Styles.cut}>
             <button
               onClick={(e) => {

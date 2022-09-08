@@ -1,45 +1,92 @@
-const { Schema, Model } = require('mongoose');
+const { Schema, model } = require('mongoose');
+
+const str = { type: String, required: false };
+const num = { type: Number, required: false };
 
 const invoiceSchema = new Schema({
+  id: str,
   date: { type: Schema.Types.Date },
+  pdf: { type: Schema.Types.Buffer },
+  photos: {
+    logo: '',
+    items: { 0: str, 1: str, 2: str, 3: str, 4: str },
+  },
+  title: {
+    main: str,
+    id: str,
+    date: str,
+    terms: str,
+    note: str,
+    tax: str,
+    discount: str,
+    total: str,
+    nettotal: str,
+    from: {
+      address: str,
+      email: str,
+      id: str,
+    },
+    to: {
+      main: str,
+      name: str,
+      address: str,
+      email: str,
+      id: str,
+    },
+    items: {
+      desc: str,
+      photo: str,
+      quan: str,
+      unit: str,
+      uPrice: str,
+      tPrice: str,
+    },
+  },
   from: {
-    logo: String,
-    name: String,
-    address: String,
-    email: String,
-    id: Number,
+    name: str,
+    address: str,
+    email: str,
+    id: str,
   },
   to: {
-    name: String,
-    address: String,
-    email: String,
-    id: Number,
+    name: str,
+    address: str,
+    email: str,
+    id: str,
   },
-  currency: String,
+  currency: {
+    index: 0,
+    symbol: str,
+    name: str,
+    symbol_native: str,
+    decimal_digits: num,
+    rounding: num,
+    code: str,
+    name_plural: str,
+  },
   items: [
     {
-      desc: String,
-      quan: Number,
-      unit: String,
-      uPrice: Number,
-      tPrice: Number,
-      photo: String,
+      desc: str,
+      quan: num,
+      unit: str,
+      uPrice: num,
+      tPrice: num,
     },
   ],
-  subtotal: Number,
+  total: num,
   tax: {
-    perc: Number,
-    amount: Number,
+    perc: Schema.Types.Mixed,
+    amount: num,
   },
   discount: {
-    perc: Number,
-    amount: Number,
+    perc: Schema.Types.Mixed,
+    amount: num,
   },
-  total: Number,
-  terms: String,
-  note: String,
+  nettotal: num,
+  terms: str,
+  note: str,
 });
 
-const invoiceModel = new Model('invoice', invoiceSchema);
+const invoiceModel = model('invoice', invoiceSchema);
 
 module.exports = invoiceModel;

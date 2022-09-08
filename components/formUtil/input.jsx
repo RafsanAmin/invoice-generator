@@ -14,7 +14,6 @@ function Input({
   contStyle,
   labH,
 }) {
-  console.log('label', label);
   return (
     <div style={contStyle} className={Styles.cont}>
       {label || labH ? <ELabel val={label} hnd={labH} /> : null}

@@ -90,17 +90,19 @@ export const reducer = (prev, action) => {
       f[action.field].amount = action.amount;
       countTotal();
       return f;
+    case 'INIT':
+      return action.init;
     default:
       return prev;
   }
 };
-
 export const init = {
+  idI: '',
   date: '',
   id: randomNumber(10),
   photos: {
     logo: '',
-    items: {},
+    items: { 0: '', 1: '', 2: '', 3: '', 4: '' },
   },
   title: {
     main: 'INVOICE',

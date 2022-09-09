@@ -44,7 +44,7 @@ export const reducer = (prev, action) => {
           return f;
         }
 
-        if (action.file.type !== 'image/png' && action !== 'image/jpeg') {
+        if (action.file.type !== 'image/png' && action.file.type !== 'image/jpeg') {
           alert('FILE ONLY CAN BE PNG & JPEG');
           return f;
         }

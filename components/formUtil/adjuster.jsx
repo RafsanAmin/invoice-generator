@@ -48,8 +48,8 @@ function Adjuster({ name, label, labH }) {
           placeholder="Give your percentage"
           value={perc || 0}
           setValue={(e) => {
-            if (!Number.isNaN(Number(e)) && Number(e) >= 0 && Number(e) <= 100) {
-              dispatch({ type: 'PERC_SET', field: name, perc: Number(e) });
+            if (!(Number.isNaN(Number(e)) || Number(e) < 0)) {
+              dispatch({ type: 'PERC_SET', field: name, perc: e });
             }
           }}
           contStyle={{
@@ -72,7 +72,7 @@ function Adjuster({ name, label, labH }) {
         prefix={d.currency.symbol}
         setValue={(e) => {
           if (!Number.isNaN(Number(e)) || Number(e) >= 0) {
-            dispatch({ type: 'AMNT_SET', field: name, amount: Number(e) });
+            dispatch({ type: 'AMNT_SET', field: name, amount: e });
           }
         }}
       />

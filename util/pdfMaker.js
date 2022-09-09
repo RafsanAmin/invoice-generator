@@ -276,6 +276,7 @@ const pdfMaker = (data) =>
           .b p {
             font-size: 1.3rem;
             text-align: right;
+            font-weight: 700;
           }
           .b h3 {
             font-size: 1.3rem;
@@ -283,6 +284,9 @@ const pdfMaker = (data) =>
           .b h3,
           .b h1 {
             color: var(--pink-darker);
+          }
+          .h{
+            font-weight: 400 !important;
           }
         </style>
       </head>
@@ -436,11 +440,11 @@ const pdfMaker = (data) =>
                   <h1>${data.title.nettotal}:</h1>
                 </div>
                 <div>
-                  <p>${data.currency.symbol} ${data.total}</p>
-                  <p>${data.currency.symbol} ${data.discount.amount}</p>
-                  <p>${data.currency.symbol} ${data.tax.amount}</p>
+                  <p><span class="h">${data.currency.symbol}</span> ${data.total}</p>
+                  <p><span class="h">${data.currency.symbol}</span> ${data.discount.amount}</p>
+                  <p><span class="h">${data.currency.symbol}</span> ${data.tax.amount}</p>
                   <h1 style="color: #000; text-align: right">
-                    ${data.currency.symbol} ${data.nettotal}
+                    <span class="h">${data.currency.symbol}</span> ${data.nettotal}
                   </h1>
                 </div>
               </div>

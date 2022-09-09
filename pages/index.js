@@ -9,7 +9,6 @@ export default function Home() {
   const [list, setList] = useState([]);
   useLayoutEffect(() => {
     setList(API.Invoices.get());
-    console.log(list);
   }, []);
   return (
     <div className="index_page">

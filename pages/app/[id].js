@@ -20,7 +20,6 @@ const app = ({ data, error }) => {
   const appState = useReducer(reducer, init);
   const [load, setLoad] = useState(false);
   useEffect(() => {
-    console.log(data);
     appState[1]({ type: 'INIT', init: data });
   }, []);
   return !error ? (

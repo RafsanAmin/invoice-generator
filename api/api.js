@@ -29,7 +29,6 @@ const API = {
   saveInvoice(data) {
     return new Promise((resolve, reject) => {
       this.savePhotos(data.photos).then((photos) => {
-        console.log('photodsadd---', photos);
         Axios.post('/save-invoice', { ...data, photos })
           .then((res) => {
             const id = res.data._id;
@@ -59,7 +58,6 @@ const API = {
       Axios.get('/get-invoice', { params: { _id: data } })
         .then((res) => {
           const dt = res.data;
-          console.log(dt);
           resolve(dt);
         })
         .catch((err) => {
@@ -83,7 +81,6 @@ const API = {
       debounce(() => {
         const temp = this.get();
         temp.splice(index, 1);
-        console.log(temp);
         return localStorage.setItem('invoices', JSON.stringify(temp));
       });
     },

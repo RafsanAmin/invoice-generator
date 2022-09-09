@@ -5,7 +5,7 @@ const num = { type: Number, required: false };
 
 const invoiceSchema = new Schema({
   id: str,
-  date: { type: Schema.Types.Date },
+  date: str,
   pdf: { type: Schema.Types.Buffer },
   photos: {
     logo: '',

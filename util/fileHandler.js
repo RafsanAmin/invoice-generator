@@ -8,6 +8,13 @@ const fileHandler = (req) =>
       items: { 0: '', 1: '', 2: '', 3: '', 4: '' },
     };
     req.pipe(req.busboy);
+    req.busboy.on('field', (name, val) => {
+      if (name === 'logo') {
+        respData.logo = val;
+      } else {
+        respData.items[name] = val;
+      }
+    });
     req.busboy.on('file', (fieldname, file) => {
       const fileName = getRandomString(12);
       if (fieldname === 'logo') {
@@ -15,20 +22,15 @@ const fileHandler = (req) =>
       } else {
         respData.items[fieldname] = fileName;
       }
-      const uploadStream = cloudinary.uploader.upload_stream(
-        {
-          folder: 'invoice',
-          use_filename: true,
-          overwrite: true,
-          filename_override: fileName,
-          unique_filename: false,
-          resource_type: 'auto',
-          invalidate: true,
-        },
-        (err, respond) => {
-          console.log(err, respond);
-        }
-      );
+      const uploadStream = cloudinary.uploader.upload_stream({
+        folder: 'invoice',
+        use_filename: true,
+        overwrite: true,
+        filename_override: fileName,
+        unique_filename: false,
+        resource_type: 'auto',
+        invalidate: true,
+      });
       file.pipe(uploadStream);
     });
     req.busboy.on('finish', () => {

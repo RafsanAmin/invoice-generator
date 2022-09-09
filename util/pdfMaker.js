@@ -1,7 +1,5 @@
 const puppeteer = require('puppeteer');
 const Promise = require('bluebird');
-const hb = require('handlebars');
-const inlineCss = require('inline-css');
 
 async function generatePdf(file, opt, callback) {
   const options = opt;
@@ -18,13 +16,7 @@ async function generatePdf(file, opt, callback) {
   const page = await browser.newPage();
 
   if (file.content) {
-    const data = await inlineCss(file.content, { url: '/' });
-    const template = hb.compile(data, { strict: true });
-    const result = template(data);
-    const html = result;
-
-    // We set the page content as the generated html by handlebars
-    await page.setContent(html, {
+    await page.setContent(file.content, {
       waitUntil: 'networkidle0', // wait for page to load completely
     });
   } else {
@@ -223,10 +215,10 @@ const pdfMaker = (data) =>
           .head {
             display: grid;
             min-width: 950px;
+            place-items: center;
             grid-template-columns: minmax(0, 4.5fr) minmax(0, 1.875fr) minmax(0, 1fr) minmax(0, 0.875fr) minmax(0, 1.75fr) minmax(0, 2fr);
             gap: 0.5rem;
             background: linear-gradient(90deg, red 0%, var(--pink-hot) 65%);
-
             border-radius: 5px;
             justify-items: center;
             padding: 1rem 1.5rem;
@@ -234,9 +226,11 @@ const pdfMaker = (data) =>
           .head > div {
             background-color: transparent;
             width: 100%;
+            text-align: center;
           }
           .table .head p {
             color: #fff;
+            text-align: center;
             font-weight: 600;
           }
           .table .item {
@@ -358,7 +352,7 @@ const pdfMaker = (data) =>
           <div class="inputsUD sp">
             <div>
               <h4>Currency</h4>
-              <p>$ US-Dollar</p>
+              <p>${data.currency.symbol_native}-${data.currency.code} || ${data.currency.name}</p>
             </div>
           </div>
           <div class="table">
@@ -390,7 +384,14 @@ const pdfMaker = (data) =>
                 <p style="text-align: left; white-space: pre-wrap">${elem.desc}</p>
               </div>
               <div>
-                <img src="https://res.cloudinary.com/dyjrfa6c2/image/upload/invoice/${data?.photos.items[ind]}" alt="No Image" />
+                ${
+                  data?.photos.items[ind]
+                    ? ` <img
+                      src="https://res.cloudinary.com/dyjrfa6c2/image/upload/invoice/${data?.photos.items[ind]}"
+                      alt="No Image"
+                    />`
+                    : `<p>No Image</p>`
+                }
               </div>
               <div>
                 <p>${elem.quan}</p>

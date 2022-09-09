@@ -356,7 +356,7 @@ const pdfMaker = (data) =>
           <div class="inputsUD sp">
             <div>
               <h4>Currency</h4>
-              <p>${data.currency.symbol_native}-${data.currency.code} || ${data.currency.name}</p>
+              <p>${data.currency.symbol}-${data.currency.code} || ${data.currency.name}</p>
             </div>
           </div>
           <div class="table">

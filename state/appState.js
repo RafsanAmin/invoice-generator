@@ -52,9 +52,18 @@ export const reducer = (prev, action) => {
       });
       return f;
     case 'DEL_PHOTO_ITEM':
-      delete f.photos.items[action.index];
+      f.photos.items[action.index] = '';
       return f;
     case 'ADD_LOGO':
+      if (action.file.size > 2 * (2 << 20)) {
+        alert('FILE CANT BE MORE THAN 2MB');
+        return f;
+      }
+
+      if (action.file.type !== 'image/png' && action.file.type !== 'image/jpeg') {
+        alert('FILE ONLY CAN BE PNG & JPEG');
+        return f;
+      }
       f.photos.logo = action.file;
       return f;
     case 'DEL_LOGO':
@@ -63,6 +72,7 @@ export const reducer = (prev, action) => {
     case 'ITEM_DEL':
       debounce(() => {
         f.items.splice(action.index, 1);
+        f.photos.items[action.index] = '';
         countTotal();
       });
       return f;

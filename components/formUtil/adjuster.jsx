@@ -48,7 +48,7 @@ function Adjuster({ name, label, labH }) {
           placeholder="Give your percentage"
           value={perc || 0}
           setValue={(e) => {
-            if (!(Number.isNaN(Number(e)) || Number(e) < 0)) {
+            if (!(Number.isNaN(Number(e)) || Number(e) < 0 || Number(e) > 100)) {
               dispatch({ type: 'PERC_SET', field: name, perc: e });
             }
           }}

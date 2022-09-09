@@ -8,14 +8,14 @@ export const reducer = (prev, action) => {
   const countTotal = () => {
     let total = 0;
     f.items.forEach((elem) => {
-      total += elem.tPrice;
+      total += Number(elem.tPrice);
     });
     f.total = total;
     if (prev.tax.perc !== null) {
-      f.tax.amount = total * (prev.tax.perc / 100);
+      f.tax.amount = total * (Number(prev.tax.perc) / 100);
     }
     if (prev.discount.perc !== null) {
-      f.discount.amount = total * (prev.discount.perc / 100);
+      f.discount.amount = total * (Number(prev.discount.perc) / 100);
     }
     f.nettotal = total + f.tax.amount - f.discount.amount;
   };

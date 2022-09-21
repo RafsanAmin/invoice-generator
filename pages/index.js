@@ -51,7 +51,7 @@ export default function Home() {
       <button
         onClick={async () => {
           const dt = await API.createInvoice(init);
-          Router.push(`${url}app/${dt._id}`);
+          Router.push(`/app/${dt._id}`);
         }}
         style={{ padding: '0.5rem 1rem' }}
         type="button"

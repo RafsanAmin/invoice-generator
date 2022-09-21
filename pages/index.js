@@ -3,7 +3,6 @@ import Router from 'next/router';
 import { useLayoutEffect, useState } from 'react';
 import API from '../api/api';
 import { init } from '../state/appState';
-import url from '../util/baseUrl';
 
 export default function Home() {
   const [list, setList] = useState([]);
@@ -22,7 +21,7 @@ export default function Home() {
       <div className="list_cont">
         {list.map((item, index) => (
           <div>
-            <div className="list" onClick={() => Router.push(`${url}app/${item.id._id}`)}>
+            <div className="list" onClick={() => Router.push(`/app/${item.id._id}`)}>
               <p>
                 {' '}
                 <span>{index + 1}</span>
